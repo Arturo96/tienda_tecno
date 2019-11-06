@@ -139,14 +139,27 @@ INSERT INTO productos VALUES (null, 1, 'Xiaomi', 'Redmi Note 8 Pro', 900000.00, 
 
 INSERT INTO productos VALUES (null, 1, 'Oneplus', '7 Pro', 2500000.00, 2, '2020-11-11', 'RAM: 8 GB, Procesador: Qualcomm Snapdragon 855, Almacenamiento: 256 GB, Tamaño de pantalla: 6.67 pulgadas');
 
+INSERT INTO compras VALUES (null, 2, 1, CURDATE());
+INSERT INTO compras VALUES (null, 1, 2, CURDATE());
+
+INSERT INTO detalle_compras VALUES (1, 1, 2);
+INSERT INTO detalle_compras VALUES (1, 2, 1);
+
+INSERT INTO detalle_compras VALUES (2, 1, 1);
+
+# Consultas
+
+SELECT d.*, p.marca, p.modelo, p.precio, (p.precio * d.cantidad) AS 'Costo total'
+FROM detalle_compras d
+    JOIN productos p ON d.producto_id = p.id
+ORDER BY d.compra_id;
 
 
-id                  int(10) auto_increment not null,
-    tipo_producto_id    int(10) not null,
-    marca               varchar(100) not null,
-    modelo              varchar(200) not null,
-    precio              float(10, 2) not null,
-    stock               int(10) not null,
-    fecha_garantia      date,
-    descripcion         MEDIUMTEXT,
-
+CREATE TABLE detalle_compras(
+    compra_id           int(10) not null,
+    producto_id         int(10) not null,
+    cantidad            int(10) not null,
+    CONSTRAINT pk_detalle_compras PRIMARY KEY(compra_id, producto_id),
+    CONSTRAINT fk_factura_compra FOREIGN KEY(compra_id) REFERENCES compras(id),
+    CONSTRAINT fk_factura_producto FOREIGN KEY(producto_id) REFERENCES productos(id)
+);
