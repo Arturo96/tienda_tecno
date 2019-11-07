@@ -1,0 +1,39 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background: #fcd307;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Fjalla One', sans-serif;
+}
+
+h2 {
+    margin-top: 1.5rem;
+}
+
+p {
+    font-family: 'Roboto Condensed', sans-serif;
+    line-height: 1.5;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+a {
+    font-family: 'Roboto Condensed';
+    text-decoration: none;
+}
