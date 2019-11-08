@@ -7,6 +7,8 @@
 
 body {
   background: #fcd307;
+  margin: 0;
+  padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -39,13 +41,45 @@ a {
   text-decoration: none;
 }
 
+input[type="text"],
+label,
+textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+label, input, textarea {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type="button"],
+input[type="submit"],
+button,
+[class$="button"] {
+  font-size: 1em;
+  margin-top: 1rem;
+  border-radius: 5px;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
 header {
   width: 85%;
   margin: 0 auto;
 }
 
 .logo h1 {
+  color: #08088e;
   margin: 1.5rem 0;
+  letter-spacing: 3px;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5), 2px 0 1px rgba(0, 0, 0, 0.5), 0 2px 1px rgba(0, 0, 0, 0.5);
+  -webkit-transition: text-shadow 0.5s;
+  transition: text-shadow 0.5s;
+}
+
+.logo h1:hover {
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5), -2px 0 1px rgba(0, 0, 0, 0.5), 0 -2px 1px rgba(0, 0, 0, 0.5);
 }
 
 .menu {
@@ -79,6 +113,8 @@ header {
   font-size: 1em;
   padding: 1em;
   color: #fff;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 .menu .menu-link:hover {
@@ -89,5 +125,95 @@ header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  background: #08088e;
+  border-radius: 7px 7px 0 0;
+}
+
+.container {
+  width: 75%;
+}
+
+.main-title {
+  text-align: center;
+  font-size: 2em;
+  color: #00ff93;
+  letter-spacing: 3px;
+}
+
+.products {
+  padding: 1.5em;
+  padding-top: 0;
+}
+
+.product {
+  margin-top: 2rem;
+  border-bottom: 1px solid #c9ff07;
+}
+
+.product .product-name {
+  margin: 1rem 0;
+  color: #c9ff07;
+}
+
+.product .product-description {
+  color: #fff;
+  letter-spacing: 1px;
+  text-align: justify;
+}
+
+aside {
+  width: 20%;
+}
+
+.login {
+  background: #fff;
+  border-radius: 5px;
+  padding: 1rem 0;
+  margin-top: 1rem;
+}
+
+.login h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.login .login-button {
+  display: block;
+  background: #0091ea;
+  color: #fff;
+  border: 1px solid #0091ea;
+  -webkit-box-shadow: 0 0 2px #0091ea;
+          box-shadow: 0 0 2px #0091ea;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transition: background 0.5s;
+  transition: background 0.5s;
+}
+
+.login .login-button:hover {
+  background: rgba(0, 145, 234, 0.5);
+}
+
+.form-login {
+  padding: 0 1em;
+}
+
+footer {
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  text-align: center;
+}
+
+footer h3 {
+  font-size: 1.25em;
+  padding: 1em;
+  font-family: 'Roboto Condensed', sans-serif;
+  letter-spacing: 5px;
 }
 /*# sourceMappingURL=style.css.map */

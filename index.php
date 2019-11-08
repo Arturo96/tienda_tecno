@@ -16,7 +16,7 @@
    <!-- Content -->
 <div class="content">
    <main class="container">
-        <h2>Nuestros Productos</h2>
+        <h2 class="main-title">Nuestros Productos</h2>
 
         <section class="products">
             <article class="product">

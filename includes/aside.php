@@ -1,10 +1,10 @@
     <aside>
         <section class="login">
             <h2>Conectarse</h2>
-            <form action="" method="post">
+            <form action="" method="post" class="form-login">
                 <label>Nombre de usuario: <input type="text"></label>
                 <label>Contraseña: <input type="text"></label>
-                <input type="submit" value="Entrar">
+                <input type="submit" class="login-button" value="Entrar">
             </form>
         </section>
 

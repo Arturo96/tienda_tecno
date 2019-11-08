@@ -6,6 +6,8 @@
 
 body {
     background: #fcd307;
+    margin: 0;
+    padding: 0;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -36,4 +38,27 @@ ul {
 a {
     font-family: 'Roboto Condensed';
     text-decoration: none;
+}
+
+input[type="text"],
+label,
+textarea {
+    display: block;
+    width: 100%;
+    margin-top: 0.75rem;
+}
+
+label, input, textarea {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type="button"],
+input[type="submit"],
+button,
+[class$="button"] {
+    font-size: 1em;
+    margin-top: 1rem;
+    border-radius: 5px;
+    padding: 0.5em;
+    cursor: pointer;
 }
