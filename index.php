@@ -67,6 +67,7 @@
         <?php
         require_once 'includes/aside.php';
         require_once 'includes/footer.php';
+        cleanErrors();
         ?>
 
 </body>

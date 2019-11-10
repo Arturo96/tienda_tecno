@@ -1,8 +1,9 @@
 aside {
-  width: 20%;
+  width: 25%;
 }
 
-.login {
+.login,
+.logged {
   background: #fff;
   border-radius: 5px;
   padding: 1rem 0;
@@ -13,8 +14,9 @@ aside {
       text-align: center;
   }
 
-  #{&}-button {
+  [class$="button"] {
       display: block;
+      text-align: center;
       background: #0091ea;
       color: #fff;
       border: 1px solid #0091ea;
@@ -32,6 +34,16 @@ aside {
 
 .form-login {
     padding: 0 1em;
+}
+
+.alert {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.25rem;
+}
+
+.danger {
+  color: #f00;
 }
 
 

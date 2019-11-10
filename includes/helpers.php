@@ -1,5 +1,21 @@
 <?php
 
+function cleanErrors() {
+    $_SESSION['errores'] = null;
+
+    unset($_SESSION['errores']);
+}
+
+function showErrors($session, $error) {
+
+    $message = '';
+
+    if(isset($session[$error])) {
+        $message = "<div class='alert danger'>".$session[$error]."</div>";
+    }
+
+    return $message;
+}
 
 function getProducts($connection) {
 
