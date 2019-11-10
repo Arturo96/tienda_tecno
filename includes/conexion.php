@@ -1,6 +1,6 @@
 <?php
 
-$connection = mysqli_connect('localhost', 'root', 'itsecurity', 'tienda_tecnologica');
+$connection = mysqli_connect('localhost', 'root', 'itsecurity', 'tienda_tecno');
 
 if(!$connection) {
     echo 'Error al conectar a la base de datos.';

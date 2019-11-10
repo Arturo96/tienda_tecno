@@ -1,24 +1,26 @@
-CREATE DATABASE tienda_tecnologica;
+DROP DATABASE tienda_tecno;
 
-use tienda_tecnologica;
+CREATE DATABASE tienda_tecno;
+
+use tienda_tecno;
 
 CREATE TABLE ciudades(
     id      int(10) auto_increment not null,
     nombre  varchar(200) not null,
     CONSTRAINT pk_ciudades PRIMARY KEY(id)
-);
+)engine=InnoDB;
 
 CREATE TABLE tipo_productos(
     id      int(10) auto_increment not null,
     nombre  varchar(200) not null,
     CONSTRAINT pk_tipo_productos PRIMARY KEY(id)
-);
+)engine=InnoDB;
 
 CREATE TABLE roles(
     id      int(10) auto_increment not null,
     nombre  varchar(200) not null,
     CONSTRAINT pk_roles PRIMARY KEY(id)
-);
+)engine=InnoDB;
 
 CREATE TABLE vendedores(
     id         int(10) auto_increment not null,
@@ -27,7 +29,7 @@ CREATE TABLE vendedores(
     documento  int(10) not null,
     CONSTRAINT pk_vendedores PRIMARY KEY(id),
     CONSTRAINT uq_documento UNIQUE(documento)
-);
+)engine=InnoDB;
 
 CREATE TABLE usuarios(
     email       varchar(100) not null,
@@ -35,7 +37,7 @@ CREATE TABLE usuarios(
     password    varchar(20) not null,
     CONSTRAINT pk_usuarios PRIMARY KEY(email),
     CONSTRAINT fk_usuario_rol FOREIGN KEY(rol_id) REFERENCES roles(id)
-);
+)engine=InnoDB;
 
 CREATE TABLE clientes(
     email       varchar(100) not null,
@@ -44,11 +46,11 @@ CREATE TABLE clientes(
     nombre      varchar(100) not null,
     apellidos   varchar(100),
     direccion   varchar(200) not null,
-    telefono    int(15),
+    telefono    bigint(15),
     CONSTRAINT pk_clientes PRIMARY KEY(email),
     CONSTRAINT fk_cliente_ciudad FOREIGN KEY(ciudad_id) REFERENCES ciudades(id),
     CONSTRAINT uq_documento UNIQUE(documento)
-);
+)engine=InnoDB;
 
 CREATE TABLE productos(
     id                  int(10) auto_increment not null,
@@ -62,17 +64,17 @@ CREATE TABLE productos(
     CONSTRAINT pk_productos PRIMARY KEY(id),
     CONSTRAINT fk_producto_tipo FOREIGN KEY(tipo_producto_id) REFERENCES tipo_productos(id)
     
-);
+)engine=InnoDB;
 
 CREATE TABLE compras(
     id                  int(10) auto_increment not null,
-    cliente_id          int(10) not null,
+    cliente             varchar(100) not null,
     vendedor_id         int(10) not null,
     fecha               date not null,
     CONSTRAINT pk_compras PRIMARY KEY(id),
-    CONSTRAINT fk_compra_cliente FOREIGN KEY(cliente_id) REFERENCES clientes(email),
+    CONSTRAINT fk_compra_cliente FOREIGN KEY(cliente) REFERENCES clientes(email),
     CONSTRAINT fk_compra_vendedor FOREIGN KEY(vendedor_id) REFERENCES vendedores(id)
-);
+)engine=InnoDB;
 
 CREATE TABLE detalle_compras(
     compra_id           int(10) not null,
@@ -81,7 +83,7 @@ CREATE TABLE detalle_compras(
     CONSTRAINT pk_detalle_compras PRIMARY KEY(compra_id, producto_id),
     CONSTRAINT fk_factura_compra FOREIGN KEY(compra_id) REFERENCES compras(id),
     CONSTRAINT fk_factura_producto FOREIGN KEY(producto_id) REFERENCES productos(id)
-);
+)engine=InnoDB;
 
 INSERT INTO ciudades VALUES (null, 'Bogotá');
 INSERT INTO ciudades VALUES (null, 'Medellín');
@@ -139,8 +141,8 @@ INSERT INTO productos VALUES (null, 1, 'Xiaomi', 'Redmi Note 8 Pro', 900000.00, 
 
 INSERT INTO productos VALUES (null, 1, 'Oneplus', '7 Pro', 2500000.00, 2, '2020-11-11', 'RAM: 8 GB, Procesador: Qualcomm Snapdragon 855, Almacenamiento: 256 GB, Tamaño de pantalla: 6.67 pulgadas');
 
-INSERT INTO compras VALUES (null, 2, 1, CURDATE());
-INSERT INTO compras VALUES (null, 1, 2, CURDATE());
+INSERT INTO compras VALUES (null, 'hlavoe@gmail.com', 1, CURDATE());
+INSERT INTO compras VALUES (null, 'darbelaez@gmail.com', 2, CURDATE());
 
 INSERT INTO detalle_compras VALUES (1, 1, 2);
 INSERT INTO detalle_compras VALUES (1, 2, 1);
