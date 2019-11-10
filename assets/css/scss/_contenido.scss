@@ -29,12 +29,12 @@
   border-bottom: 1px solid #c9ff07;
 
   #{&}-name {
+    font-size: 1.6em;
     margin: 1rem 0;
     color: #c9ff07;
   }
 
   #{&}-image {
-
   }
 
   #{&}-description {
@@ -42,8 +42,34 @@
     letter-spacing: 1px;
     text-align: justify;
   }
-
 }
 
+.main-info {
+  display: flex;
+}
 
+.product-image {
+}
 
+.product-info {
+  margin-left: 4rem;
+
+  h4 {
+    margin-top: 3rem;
+    font-size: 1.5em;
+    color: #c9ff07;
+
+    &:first-of-type {
+      font-size: 1.25em;
+      margin-top: 0;
+    }
+  }
+}
+
+[class$="banner"] {
+  display: inline-block;
+  background: #09bd09;
+  border-radius: 5px;
+  padding: 0.35em;
+  
+}

@@ -1,5 +1,6 @@
 <?php
 
+
 function getProducts($connection) {
 
     $sql = 'SELECT * FROM productos';

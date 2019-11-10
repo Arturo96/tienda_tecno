@@ -91,8 +91,8 @@ header {
       -ms-flex-align: center;
           align-items: center;
   background: #443737;
-  -webkit-box-shadow: 0 0 3px #000, 0 2px 2px #000, 0 -2px 2px #000;
-          box-shadow: 0 0 3px #000, 0 2px 2px #000, 0 -2px 2px #000;
+  -webkit-box-shadow: 0 0 3px #000, 0 2px 2px #000, 0 -2px 2px #000;
+          box-shadow: 0 0 3px #000, 0 2px 2px #000, 0 -2px 2px #000;
   overflow: hidden;
 }
 
@@ -156,6 +156,7 @@ header {
 }
 
 .product .product-name {
+  font-size: 1.6em;
   margin: 1rem 0;
   color: #c9ff07;
 }
@@ -164,6 +165,34 @@ header {
   color: #fff;
   letter-spacing: 1px;
   text-align: justify;
+}
+
+.main-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.product-info {
+  margin-left: 4rem;
+}
+
+.product-info h4 {
+  margin-top: 3rem;
+  font-size: 1.5em;
+  color: #c9ff07;
+}
+
+.product-info h4:first-of-type {
+  font-size: 1.25em;
+  margin-top: 0;
+}
+
+[class$="banner"] {
+  display: inline-block;
+  background: #09bd09;
+  border-radius: 5px;
+  padding: 0.35em;
 }
 
 aside {
