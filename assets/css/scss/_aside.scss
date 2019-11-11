@@ -37,6 +37,7 @@ aside {
 }
 
 .alert {
+  text-align: center;
   font-family: sans-serif;
   font-weight: bold;
   margin-top: 0.25rem;
@@ -44,6 +45,10 @@ aside {
 
 .danger {
   color: #f00;
+}
+
+.success {
+  color: lime;
 }
 
 

@@ -60,6 +60,11 @@ label, input, textarea {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+select {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
 input[type="button"],
 input[type="submit"],
 button,
@@ -247,6 +252,28 @@ header {
   background: #0091ea;
 }
 
+.form-user {
+  margin-bottom: 2rem;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-user label, .form-user input[type="submit"] {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.form-user label {
+  margin-top: 2rem;
+  color: var(--second-color-title);
+  font-weight: bold;
+}
+
+.form-user input[type="submit"] {
+  margin-top: 2rem;
+  background: #00b0ff;
+}
+
 aside {
   width: 25%;
 }
@@ -291,6 +318,7 @@ aside {
 }
 
 .alert {
+  text-align: center;
   font-family: sans-serif;
   font-weight: bold;
   margin-top: 0.25rem;
@@ -298,6 +326,10 @@ aside {
 
 .danger {
   color: #f00;
+}
+
+.success {
+  color: lime;
 }
 
 footer {

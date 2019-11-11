@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +14,7 @@
 
     <?php
     require_once 'includes/header.php';
-
-    if (!isset($_SESSION['usuario'])) {
-        header('Location: index.php');
-    } else {
-        if ($_SESSION['usuario']['rol'] != 'Admin') header('Location: index.php');
-    }
-
+    require_once 'includes/redireccion_admin.php';
     ?>
 
     <div class="content">

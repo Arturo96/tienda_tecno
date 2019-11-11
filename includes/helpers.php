@@ -2,8 +2,23 @@
 
 function cleanErrors() {
     $_SESSION['errores'] = null;
-
+    $_SESSION['completed'] = null;
     unset($_SESSION['errores']);
+    unset($_SESSION['completed']);
+}
+
+function existsEmail($connection, $email) {
+    $sql = "SELECT * FROM usuarios WHERE email = '$email';";
+
+    $usuario = mysqli_query($connection, $sql);
+
+    if($usuario && mysqli_num_rows($usuario) == 1) {
+        return true;
+    }
+
+    return false;
+
+
 }
 
 function showErrors($session, $error) {
@@ -32,6 +47,23 @@ function getProducts($connection) {
     return $result;
 
 }
+
+function getRoles($connection) {
+
+    $sql = 'SELECT * FROM roles';
+
+    $result = [];
+
+    $roles = mysqli_query($connection, $sql);
+
+    if($roles && mysqli_num_rows($roles) >= 1) {
+        $result = $roles;
+    }
+
+    return $result;
+
+}
+
 
 function getUsuarios($connection) {
 
