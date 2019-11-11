@@ -33,6 +33,23 @@ function getProducts($connection) {
 
 }
 
+function getUsuarios($connection) {
+
+    $sql = "SELECT u.*, r.nombre AS rol FROM usuarios u
+                JOIN roles r ON u.rol_id = r.id;";
+
+    $result = [];
+
+    $usuarios = mysqli_query($connection, $sql);
+
+    if($usuarios && mysqli_num_rows($usuarios) >= 1) {
+        $result = $usuarios;
+    }
+
+    return $result;
+
+}
+
 function getCategories($connection) {
     $sql = 'SELECT * FROM tipo_productos LIMIT 10';
 

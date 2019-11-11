@@ -1,3 +1,8 @@
+:root {
+  --second-color-title: #c9ff07;
+  --border-bottom: 1px solid var(--second-color-title);
+}
+
 *,
 *::before,
 *::after {
@@ -154,13 +159,13 @@ header {
 
 .product {
   margin-top: 2rem;
-  border-bottom: 1px solid #c9ff07;
+  border-bottom: var(--border-bottom);
 }
 
 .product .product-name {
   font-size: 1.6em;
   margin: 1rem 0;
-  color: #c9ff07;
+  color: var(--second-color-title);
 }
 
 .product .product-description {
@@ -182,7 +187,7 @@ header {
 .product-info h4 {
   margin-top: 3rem;
   font-size: 1.5em;
-  color: #c9ff07;
+  color: var(--second-color-title);
 }
 
 .product-info h4:first-of-type {
@@ -195,6 +200,51 @@ header {
   background: #09bd09;
   border-radius: 5px;
   padding: 0.35em;
+}
+
+.users-table {
+  border: var(--border-bottom);
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 1rem auto 4rem;
+}
+
+.users-table th {
+  font-size: 1.25em;
+  color: var(--second-color-title);
+}
+
+.users-table td {
+  color: #fff;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.users-table th, .users-table td {
+  border: var(--border-bottom);
+  padding: 1em;
+}
+
+.edit-button {
+  background: #0091ea;
+}
+
+.delete-button {
+  background: #f00;
+}
+
+.add-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.add-button {
+  display: inline-block;
+  margin-top: 1rem;
+  background: #0091ea;
 }
 
 aside {

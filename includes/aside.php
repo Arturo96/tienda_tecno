@@ -4,12 +4,13 @@
         $usuario = $_SESSION['usuario'];
         if(!empty($usuario)): ?>
                 <section class="logged">
-                    <?= var_dump($usuario) ?>
                     <h2>Bienvenido, <?= $usuario['email'] ?></h2>
                     <a href="" class="add-buy logged-button">Realizar compra</a>
-                    <a href="" class="logged-button">Usuarios</a>
-                    <a href="" class="logged-button">Productos</a>
-                    <a href="" class="logged-button">Vendedores</a>
+                    <?php if($usuario['rol'] == 'Admin'): ?>
+                        <a href="list_users.php" class="logged-button">Usuarios</a>
+                        <a href="" class="logged-button">Productos</a>
+                        <a href="" class="logged-button">Vendedores</a>
+                    <?php endif; ?>
                     <a href="logout.php" class="logged-button">Cerrar sesión</a>
                 </section>
         <?php endif; ?>
