@@ -107,6 +107,20 @@ function getSellers($connection) {
     return $result;
 }
 
+function getSellerById($connection, $id) {
+    $sql = "SELECT * FROM vendedores WHERE id = $id;";
+
+    $result = [];
+
+    $seller = mysqli_query($connection, $sql);
+
+    if($seller && mysqli_num_rows($seller) == 1) {
+        $result = mysqli_fetch_assoc($seller);
+    }
+
+    return $result;
+}
+
 function getUserByEmail($connection, $email) {
 
     $sql = "SELECT u.*, r.nombre AS rol FROM usuarios u

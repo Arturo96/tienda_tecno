@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Editar Usuario</title>
+    <title>Editar Vendedor</title>
 </head>
 
 <body>
@@ -16,53 +16,50 @@
     require_once 'includes/header.php';
     require_once 'includes/redireccion_admin.php';
 
-    $user_email = mysqli_real_escape_string($connection, $_GET['id']);
-    $usuario = getUserByEmail($connection, $user_email);
+    $seller_id = mysqli_real_escape_string($connection, $_GET['id']);
+    $seller = getSellerById($connection, $seller_id);
 
-    if(empty($usuario)) header('Location: index.php');
+    if (empty($seller)) header('Location: index.php');
 
     ?>
 
     <div class="content">
         <main class="container">
 
-            <h2 class="main-title">Editar Usuario</h2>
+            <h2 class="main-title">Editar Vendedor</h2>
 
-            <?php 
-            if(isset($_SESSION['completed'])): ?>
+            <?php
+            if (isset($_SESSION['completed'])) : ?>
                 <div class="alert success">
                     <?= $_SESSION['completed'] ?>
                 </div>
             <?php endif; ?>
 
-            <form action="register_user.php" class="form-user" method="post">
-                
-                <input type="hidden" name="user_email" value="<?= $user_email ?>">
+            <form action="register_seller.php" class="form-seller" method="post">
 
-                <label>Correo electrónico:
-                    <input name="email" type="email" value="<?= $usuario['email'] ?>">
+                <input type="hidden" name="seller_id" value="<?= $seller_id ?>" >
+
+                <label>Documento:
+                    <input name="seller_document" type="text" value="<?= $seller['documento'] ?>">
                 </label>
 
-                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'email') : ''  ?>
-                
-                <label>Rol:
-                    <select name="rol">
-                      <?php 
-                            $roles = getRoles($connection);
-                            while($rol = mysqli_fetch_assoc($roles)): 
-                                $selected = '';
-                                if($rol['id'] == $usuario['rol_id']) {
-                                    $selected = 'selected';
-                                }
-                      ?>
-                                <option value="<?= $rol['id'] ?>" <?= $selected ?>><?= $rol['nombre'] ?></option>
-                      <?php endwhile; ?>
-                    </select>
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'seller_document') : ''  ?>
+
+                <label>Nombres:
+                    <input name="seller_name" type="text" value="<?= $seller['nombre'] ?>">
                 </label>
 
-                <input type="submit" name="submitUser" value="Actualizar">
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'seller_name') : ''  ?>
 
-                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'usuario') : '' ?>
+                <label>Apellidos:
+                    <input name="seller_last" type="text" value="<?= $seller['apellidos'] ?>">
+                </label>
+
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'seller_last') : ''  ?>
+
+                <input type="submit" name="submitSeller" value="Actualizar">
+
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'db') : '' ?>
 
             </form>
 
