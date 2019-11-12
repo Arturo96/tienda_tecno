@@ -96,11 +96,15 @@
 }
 
 .edit-button {
-  background: #0091ea;
+  background: $edit-button;
 }
 
 .delete-button {
-  background: #f00;
+  background: $delete-button;
+
+  &:hover {
+    background: rgba($delete-button, 0.5);
+  }
 }
 
 .add-container {
@@ -111,7 +115,13 @@
 .add-button {
   display: inline-block;
   margin-top: 1rem;
-  background: #0091ea;
+  background: $edit-button;
+}
+
+.edit-button, .add-button {
+  &:hover {
+    background: rgba($edit-button, 0.5);
+  }
 }
 
 .form-user {
@@ -133,6 +143,14 @@
   input[type="submit"] {
     margin-top: 2rem;
     background: #00b0ff;
+    color: #fff;
+    transition: all 0.5s;
+
+    &:hover {
+      background: rgba(#00b0ff, 0.7);
+    }
+
+    
   }
 }
 

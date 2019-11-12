@@ -64,7 +64,6 @@ function getRoles($connection) {
 
 }
 
-
 function getUsuarios($connection) {
 
     $sql = "SELECT u.*, r.nombre AS rol FROM usuarios u
@@ -79,8 +78,25 @@ function getUsuarios($connection) {
     }
 
     return $result;
-
 }
+
+function getUserByEmail($connection, $email) {
+
+    $sql = "SELECT u.*, r.nombre AS rol FROM usuarios u
+                JOIN roles r ON u.rol_id = r.id 
+            WHERE u.email = '$email';";
+
+    $result = [];
+
+    $usuario = mysqli_query($connection, $sql);
+
+    if($usuario && mysqli_num_rows($usuario) == 1) {
+        $result = mysqli_fetch_assoc($usuario);
+    }
+
+    return $result;
+}
+
 
 function getCategories($connection) {
     $sql = 'SELECT * FROM tipo_productos LIMIT 10';

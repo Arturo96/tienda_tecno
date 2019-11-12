@@ -57,6 +57,7 @@ label, input, textarea {
 select {
     margin-top: 1rem;
     margin-left: 1rem;
+    padding: 0.35em;
 }
 
 input[type="button"],
@@ -68,4 +69,5 @@ button,
     border-radius: 5px;
     padding: 0.5em;
     cursor: pointer;
+    transition: background 0.5s;
 }

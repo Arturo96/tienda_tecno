@@ -1,6 +1,8 @@
 :root {
   --second-color-title: #c9ff07;
   --border-bottom: 1px solid var(--second-color-title);
+  --edit-button: #0091ea;
+  --delete-button: #f00;
 }
 
 *,
@@ -63,6 +65,7 @@ label, input, textarea {
 select {
   margin-top: 1rem;
   margin-left: 1rem;
+  padding: 0.35em;
 }
 
 input[type="button"],
@@ -74,6 +77,8 @@ button,
   border-radius: 5px;
   padding: 0.5em;
   cursor: pointer;
+  -webkit-transition: background 0.5s;
+  transition: background 0.5s;
 }
 
 header {
@@ -103,8 +108,8 @@ header {
       -ms-flex-align: center;
           align-items: center;
   background: #443737;
-  -webkit-box-shadow: 0 0 3px #000, 0 2px 2px #000, 0 -2px 2px #000;
-          box-shadow: 0 0 3px #000, 0 2px 2px #000, 0 -2px 2px #000;
+  -webkit-box-shadow: 0 0 3px #000, 0 2px 2px #000, 0 -2px 2px #000;
+          box-shadow: 0 0 3px #000, 0 2px 2px #000, 0 -2px 2px #000;
   overflow: hidden;
 }
 
@@ -237,6 +242,10 @@ header {
   background: #f00;
 }
 
+.delete-button:hover {
+  background: rgba(255, 0, 0, 0.5);
+}
+
 .add-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -250,6 +259,10 @@ header {
   display: inline-block;
   margin-top: 1rem;
   background: #0091ea;
+}
+
+.edit-button:hover, .add-button:hover {
+  background: rgba(0, 145, 234, 0.5);
 }
 
 .form-user {
@@ -272,6 +285,13 @@ header {
 .form-user input[type="submit"] {
   margin-top: 2rem;
   background: #00b0ff;
+  color: #fff;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.form-user input[type="submit"]:hover {
+  background: rgba(0, 176, 255, 0.7);
 }
 
 aside {
