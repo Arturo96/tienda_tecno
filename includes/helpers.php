@@ -18,7 +18,6 @@ function existsEmail($connection, $email) {
 
     return false;
 
-
 }
 
 function showErrors($session, $error) {

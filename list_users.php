@@ -21,6 +21,15 @@
         <main class="container">
             <h2 class="main-title">Listado de Usuarios</h2>
 
+        <?php if(!empty($_SESSION['errores'])) {
+                echo showErrors($_SESSION['errores'], 'db');
+            } 
+                if(isset($_SESSION['completed'])): ?>
+                    <div class="alert success">
+                        <?= $_SESSION['completed'] ?>
+                    </div>
+        <?php   endif; ?>
+
             <div class="add-container">
                 <a class="add-button" href="add_user.php">Agregar usuario</a>
             </div>
@@ -43,7 +52,7 @@
                                 <td><?= $usuario['rol'] ?></td>
                                 <td>
                                     <a href="edit_user.php?id=<?= $usuario['email'] ?>" class="edit-button">Editar</a>
-                                    <a href="delete_user.php?id=<?= $usuario['email'] ?>" class="delete-button">Eliminar</a>                                    
+                                    <a href="delete_user.php?id=<?= $usuario['email'] ?>"  class="delete-button">Eliminar</a>                                    
                                 </td>
                             </tr>    
                   <?php endwhile; ?>
