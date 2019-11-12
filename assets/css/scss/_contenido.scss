@@ -73,7 +73,7 @@
   padding: 0.35em;
 }
 
-.users-table {
+[class$="table"] {
   border: var(--border-bottom);
   font-family: 'Roboto Condensed', sans-serif;
   margin: 1rem auto 4rem;
@@ -124,7 +124,7 @@
   }
 }
 
-.form-user {
+[class^="form"] {
   margin-bottom: 2rem;
   width: 75%;
   margin-left: auto;

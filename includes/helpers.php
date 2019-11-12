@@ -20,6 +20,19 @@ function existsEmail($connection, $email) {
 
 }
 
+function existsDocument($connection, $document) {
+    $sql = "SELECT * FROM vendedores WHERE documento = $document;";
+
+    $seller = mysqli_query($connection, $sql);
+
+    if($seller && mysqli_num_rows($seller) == 1) {
+        return true;
+    }
+
+    return false;
+
+}
+
 function showErrors($session, $error) {
 
     $message = '';
@@ -74,6 +87,21 @@ function getUsuarios($connection) {
 
     if($usuarios && mysqli_num_rows($usuarios) >= 1) {
         $result = $usuarios;
+    }
+
+    return $result;
+}
+
+function getSellers($connection) {
+
+    $sql = "SELECT * FROM vendedores ORDER BY apellidos;";
+
+    $result = [];
+
+    $sellers = mysqli_query($connection, $sql);
+
+    if($sellers && mysqli_num_rows($sellers) >= 1) {
+        $result = $sellers;
     }
 
     return $result;

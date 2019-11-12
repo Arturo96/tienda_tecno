@@ -10,7 +10,7 @@
                     <?php if($usuario['rol'] == 'Admin'): ?>
                         <a href="list_users.php" class="logged-button">Usuarios</a>
                         <a href="" class="logged-button">Productos</a>
-                        <a href="" class="logged-button">Vendedores</a>
+                        <a href="vendedores.php" class="logged-button">Vendedores</a>
                     <?php endif; ?>
                     <a href="logout.php" class="logged-button">Cerrar sesión</a>
                 </section>

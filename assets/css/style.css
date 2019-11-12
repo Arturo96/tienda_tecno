@@ -212,24 +212,24 @@ header {
   padding: 0.35em;
 }
 
-.users-table {
+[class$="table"] {
   border: var(--border-bottom);
   font-family: 'Roboto Condensed', sans-serif;
   margin: 1rem auto 4rem;
 }
 
-.users-table th {
+[class$="table"] th {
   font-size: 1.25em;
   color: var(--second-color-title);
 }
 
-.users-table td {
+[class$="table"] td {
   color: #fff;
   font-size: 1em;
   font-weight: bold;
 }
 
-.users-table th, .users-table td {
+[class$="table"] th, [class$="table"] td {
   border: var(--border-bottom);
   padding: 1em;
 }
@@ -265,24 +265,24 @@ header {
   background: rgba(0, 145, 234, 0.5);
 }
 
-.form-user {
+[class^="form"] {
   margin-bottom: 2rem;
   width: 75%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.form-user label, .form-user input[type="submit"] {
+[class^="form"] label, [class^="form"] input[type="submit"] {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-.form-user label {
+[class^="form"] label {
   margin-top: 2rem;
   color: var(--second-color-title);
   font-weight: bold;
 }
 
-.form-user input[type="submit"] {
+[class^="form"] input[type="submit"] {
   margin-top: 2rem;
   background: #00b0ff;
   color: #fff;
@@ -290,7 +290,7 @@ header {
   transition: all 0.5s;
 }
 
-.form-user input[type="submit"]:hover {
+[class^="form"] input[type="submit"]:hover {
   background: rgba(0, 176, 255, 0.7);
 }
 
