@@ -1,7 +1,8 @@
     <aside>
 
     <?php 
-        $usuario = $_SESSION['usuario'];
+        if(isset($_SESSION['usuario'])) $usuario = $_SESSION['usuario'];
+        
         if(!empty($usuario)): ?>
                 <section class="logged">
                     <h2>Bienvenido, <?= $usuario['email'] ?></h2>

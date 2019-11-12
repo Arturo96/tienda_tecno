@@ -33,19 +33,19 @@
                     <input name="email" type="email">
                 </label>
 
-                <?php echo showErrors($_SESSION['errores'], 'email')  ?>
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'email') : ''  ?>
 
                 <label>Contraseña:
                     <input name="password" type="password">
                 </label>
 
-                <?php echo showErrors($_SESSION['errores'], 'password')  ?>
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'password') : ''  ?>
 
                 <label>Confirmar contraseña:
                     <input name="confirm_password" type="password">
                 </label>
 
-                <?php echo showErrors($_SESSION['errores'], 'confirm_password')  ?>
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'confirm_password') : ''  ?>
                 
                 <label>Rol:
                     <select name="rol">
@@ -59,7 +59,7 @@
 
                 <input type="submit" name="submitUser" value="Registrar usuario">
 
-                <?php echo showErrors($_SESSION['errores'], 'usuario')  ?>
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'usuario') : '' ?>
 
             </form>
 
