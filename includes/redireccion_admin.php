@@ -5,7 +5,9 @@ if (!isset($_SESSION['usuario'])) {
     $permissions = false;
 
 } else {
-    if ($_SESSION['usuario']['rol'] != 'Admin') header('Location: index.php');
-    $permissions = false;
-
+    if ($_SESSION['usuario']['rol'] != 'Admin') {
+        $permissions = false;
+        header('Location: index.php');
+    } 
+    
 }

@@ -265,24 +265,24 @@ header {
   background: rgba(0, 145, 234, 0.5);
 }
 
-[class^="form"] {
+.form-user, .form-seller {
   margin-bottom: 2rem;
   width: 75%;
   margin-left: auto;
   margin-right: auto;
 }
 
-[class^="form"] label, [class^="form"] input[type="submit"] {
+.form-user label, .form-user input[type="submit"], .form-seller label, .form-seller input[type="submit"] {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-[class^="form"] label {
+.form-user label, .form-seller label {
   margin-top: 2rem;
   color: var(--second-color-title);
   font-weight: bold;
 }
 
-[class^="form"] input[type="submit"] {
+.form-user input[type="submit"], .form-seller input[type="submit"] {
   margin-top: 2rem;
   background: #00b0ff;
   color: #fff;
@@ -290,7 +290,7 @@ header {
   transition: all 0.5s;
 }
 
-[class^="form"] input[type="submit"]:hover {
+.form-user input[type="submit"]:hover, .form-seller input[type="submit"]:hover {
   background: rgba(0, 176, 255, 0.7);
 }
 
