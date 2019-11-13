@@ -13,10 +13,10 @@ if (!empty($_POST)) {
 
     $submit = $_POST['submitProduct'];
 
-    // if($submit == 'Actualizar') {
-    //     $product_id = $_POST['product_id'];
-    //     $location = "edit_product.php?id=$product_id";
-    // } 
+    if($submit == 'Actualizar') {
+        $product_id = (int) $_POST['product_id'];
+        $location = "edit_product.php?id=$product_id";
+    } 
 
     $tipo_producto = (int) mysqli_real_escape_string($connection, $_POST['tipo_producto']);
 
@@ -80,16 +80,18 @@ if (!empty($_POST)) {
     }
 
     if (count($errores) == 0) {
-        echo 'Sin errores';
-        die();
-        if ($submit != 'Actualizar') {
-            $sql = "INSERT INTO vendedores VALUES(null, '$product_name', '$product_last', $tipo_producto);";
+        if ($submit == 'Actualizar') {
+             $sql = "UPDATE productos SET 
+                         tipo_producto_id = $tipo_producto,
+                         marca            = '$marca_producto',
+                         modelo           = '$modelo_producto',
+                         precio           = $precio_producto,
+                         stock            = $stock_producto,
+                         fecha_garantia   = '$fecha_producto',
+                         descripcion      =  '$desc_producto'
+                     WHERE id = $product_id;";
         } else {
-            $sql = "UPDATE vendedores SET 
-                        nombre     = '$product_name',
-                        apellidos  = '$product_last',
-                        documento  =  $tipo_producto
-                    WHERE id = $product_id;";
+            $sql = "INSERT INTO productos VALUES(null, $tipo_producto,'$marca_producto', '$modelo_producto', $precio_producto, $stock_producto, '$fecha_producto', '$desc_producto');";
         }
 
         $product = mysqli_query($connection, $sql);
@@ -99,13 +101,13 @@ if (!empty($_POST)) {
             if ($submit == 'Actualizar') {
                 $string = 'actualizado';
             }
-            $_SESSION['completed'] = "Vendedor $string correctamente.";
+            $_SESSION['completed'] = "Producto $string correctamente.";
         } else {
             $string = 'insertar';
             if ($submit == 'Actualizar') {
                 $string = 'actualizar';
             }
-            $errores['db'] = "Error al $string el vendedor: " . mysqli_error($connection);
+            $errores['db'] = "Error al $string el producto: " . mysqli_error($connection);
         }
     }
 

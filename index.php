@@ -33,6 +33,8 @@
 
             <section class="products">
 
+
+
                 <?php if($permissions): ?>
                     <a class="add-button" href="add_product.php">Agregar producto</a>
                 <?php endif; ?>
@@ -56,6 +58,10 @@
                                                 <a class="edit-button" href="edit_product.php?id=<?= $product['id'] ?>">Editar</a>
                                                 <a class="delete-button" href="delete_product.php?id=<?= $product['id'] ?>">Borrar</a>
                                             </div>
+
+                                            <?php if(isset($_SESSION['errores'])) {
+                                                    echo showErrors($_SESSION['errores'], 'db');
+                                            } ?>
                                     <?php endif; ?>
 
                                     <h4 class="price-product"><?= $product['precio'] ?> $</h4>
@@ -67,7 +73,7 @@
 
                             <div class="especificaciones">
                                 <?php
-                                        $especificaciones = explode(',', $product['descripcion']);
+                                        $especificaciones = explode(';', $product['descripcion']);
                                         foreach ($especificaciones as $esp) {
                                             echo "<p class='product-description'>" . $esp . "</p>";
                                         }

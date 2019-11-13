@@ -54,13 +54,45 @@ function getProducts($connection, $tipo = false) {
 
     $result = [];
 
-    $products = mysqli_query($connection, $sql);
+    $product = mysqli_query($connection, $sql);
 
-    if($products && mysqli_num_rows($products) >= 1) {
-        $result = $products;
+    if($product && mysqli_num_rows($product) >= 1) {
+        $result = $product;
     }
 
     return $result;
+
+}
+
+function getProductById($connection, $product_id) {
+
+    $sql = "SELECT * FROM productos WHERE id = $product_id";
+
+    $result = [];
+
+    $product = mysqli_query($connection, $sql);
+
+    if($product && mysqli_num_rows($product) == 1) {
+        $result = mysqli_fetch_assoc($product);
+    }
+
+    return $result;
+
+}
+
+function existsProductInBuy($connection, $product_id) {
+
+    $sql = "SELECT * FROM detalle_compras WHERE producto_id = $product_id";
+
+    $result = [];
+
+    $product = mysqli_query($connection, $sql);
+
+    if($product && mysqli_num_rows($product) == 1) {
+        return true;
+    }
+
+    return false;
 
 }
 
@@ -148,10 +180,10 @@ function getCategories($connection) {
 
     $result = [];
 
-    $products = mysqli_query($connection, $sql);
+    $product = mysqli_query($connection, $sql);
 
-    if($products && mysqli_num_rows($products) >= 1) {
-        $result = $products;
+    if($product && mysqli_num_rows($product) >= 1) {
+        $result = $product;
     }
 
     return $result;
