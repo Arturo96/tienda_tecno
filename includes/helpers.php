@@ -44,9 +44,13 @@ function showErrors($session, $error) {
     return $message;
 }
 
-function getProducts($connection) {
+function getProducts($connection, $tipo = false) {
 
-    $sql = 'SELECT * FROM productos';
+    $string = "productos";
+
+    if($tipo) $string = "tipo_productos";
+
+    $sql = "SELECT * FROM $string";
 
     $result = [];
 

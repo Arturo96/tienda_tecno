@@ -50,12 +50,17 @@ textarea {
     margin-top: 0.75rem;
 }
 
+textarea {
+    font-size: 0.75em;
+    resize: none;
+}
+
 label, input, textarea {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-select {
-    margin-top: 1rem;
+select, input[type="number"], input[type="date"]  {
+    margin-top: 0.75rem;
     margin-left: 1rem;
     padding: 0.35em;
 }

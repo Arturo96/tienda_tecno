@@ -13,6 +13,14 @@
 <body>
     <?php
     require_once 'includes/header.php';
+    $permissions = true;
+    if (!isset($_SESSION['usuario'])) {
+        $permissions = false;
+    } else {
+        if ($_SESSION['usuario']['rol'] != 'Admin') {
+            $permissions = false;
+        }
+    }
 
     $products = getProducts($connection);
 
@@ -24,6 +32,11 @@
             <h2 class="main-title">Nuestros Productos</h2>
 
             <section class="products">
+
+                <?php if($permissions): ?>
+                    <a class="add-button" href="add_product.php">Agregar producto</a>
+                <?php endif; ?>
+
                 <?php if (!empty($products)) :
                     while ($product = mysqli_fetch_assoc($products)) : ?>
                         <article class="product">
@@ -34,9 +47,15 @@
                                 <img src="assets/img/rn8-pro.jpg" alt="Imagen de Producto 1" class="product-image">
                                 <div class="product-info">
                                     <?php if ($product['stock'] > 0) : ?>
-                                        <h4 class="sale-banner">Sale</h4>
+                                        <h4 class="sale-banner">Sale</h4><br>
                                     <?php else : ?>
                                         <h4 class="empty-banner">Agotado</h4>
+                                    <?php endif; 
+                                        if($permissions): ?>
+                                            <div class="banner-container">
+                                                <a class="edit-button" href="edit_product.php?id=<?= $product['id'] ?>">Editar</a>
+                                                <a class="delete-button" href="delete_product.php?id=<?= $product['id'] ?>">Borrar</a>
+                                            </div>
                                     <?php endif; ?>
 
                                     <h4 class="price-product"><?= $product['precio'] ?> $</h4>

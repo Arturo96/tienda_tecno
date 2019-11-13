@@ -73,6 +73,10 @@
   padding: 0.35em;
 }
 
+.banner-container {
+  margin-top: 1rem;
+}
+
 [class$="table"] {
   border: var(--border-bottom);
   font-family: 'Roboto Condensed', sans-serif;
@@ -116,6 +120,7 @@
   display: inline-block;
   margin-top: 1rem;
   background: $edit-button;
+  color: #fff;
 }
 
 .edit-button, .add-button {
@@ -124,7 +129,7 @@
   }
 }
 
-.form-user, .form-seller {
+.form-user, .form-seller, .form-product {
   margin-bottom: 2rem;
   width: 75%;
   margin-left: auto;
