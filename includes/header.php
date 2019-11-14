@@ -16,7 +16,7 @@ $type_products = getCategories($connection);
         <ul class="menu">
             <?php if(!empty($type_products)): 
                     while($type_product = mysqli_fetch_assoc($type_products)): ?>
-                        <li class="menu-item"><a href="" class="menu-link"><?= $type_product['nombre'] ?></a></li>
+                        <li class="menu-item"><a href="categoria.php?id=<?= $type_product['id'] ?>" class="menu-link"><?= $type_product['nombre'] ?></a></li>
             <?php   endwhile;
                   endif; ?>
         </ul>

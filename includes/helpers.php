@@ -64,9 +64,13 @@ function getProducts($connection, $tipo = false) {
 
 }
 
-function getProductById($connection, $product_id) {
+function getProductById($connection, $product_id, $tipo = false) {
 
-    $sql = "SELECT * FROM productos WHERE id = $product_id";
+    $string = "productos";
+
+    if($tipo) $string = "tipo_productos";
+
+    $sql = "SELECT * FROM $string WHERE id = $product_id";
 
     $result = [];
 
@@ -78,6 +82,20 @@ function getProductById($connection, $product_id) {
 
     return $result;
 
+}
+
+function getProductByCategory($connection, $category_id) {
+    $sql = "SELECT * FROM productos WHERE tipo_producto_id = $category_id";
+
+    $result = [];
+
+    $products = mysqli_query($connection, $sql);
+
+    if($products && mysqli_num_rows($products) >= 1) {
+        $result = $products;
+    }
+
+    return $result;
 }
 
 function existsProductInBuy($connection, $product_id) {
