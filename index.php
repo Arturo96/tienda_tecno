@@ -33,13 +33,18 @@
 
             <section class="products">
 
-
-
-                <?php if($permissions): ?>
+                <?php if(isset($_SESSION['completed'])): ?>
+                    <div class="alert success"><?= $_SESSION['completed'] ?></div>
+                <?php endif; 
+                if(isset($_SESSION['errores'])) {
+                    echo showErrors($_SESSION['errores'], 'db');
+                }
+                  
+                if($permissions): ?>
                     <a class="add-button" href="add_product.php">Agregar producto</a>
-                <?php endif; ?>
+                <?php endif ; 
 
-                <?php if (!empty($products)) :
+                if (!empty($products)) :
                     while ($product = mysqli_fetch_assoc($products)) : ?>
                         <article class="product">
                             <a href="">
@@ -59,9 +64,6 @@
                                                 <a class="delete-button" href="delete_product.php?id=<?= $product['id'] ?>">Borrar</a>
                                             </div>
 
-                                            <?php if(isset($_SESSION['errores'])) {
-                                                    echo showErrors($_SESSION['errores'], 'db');
-                                            } ?>
                                     <?php endif; ?>
 
                                     <h4 class="price-product"><?= $product['precio'] ?> $</h4>

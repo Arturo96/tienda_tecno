@@ -12,7 +12,7 @@ if ($permissions) {
 
     $errores = [];
 
-    if (!empty($product) || !existsProductInBuy($connection, $product_id)) {
+    if (!empty($product) && !existsProductInBuy($connection, $product_id)) {
         
         $sql = "DELETE FROM productos WHERE id = $product_id;";
         $result = mysqli_query($connection, $sql);
@@ -24,7 +24,7 @@ if ($permissions) {
 
         
     } elseif(existsProductInBuy($connection, $product_id)) {
-        $errores['db'] = "Error al eliminar el producto: hay compras que dependen de ese producto. ";
+        $errores['db'] = "Error al eliminar el producto {$product['marca']} {$product['modelo']}: hay compras que dependen de ese producto. ";
     }
     $_SESSION['errores'] = $errores;
 }

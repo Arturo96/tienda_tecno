@@ -82,13 +82,11 @@ function getProductById($connection, $product_id) {
 
 function existsProductInBuy($connection, $product_id) {
 
-    $sql = "SELECT * FROM detalle_compras WHERE producto_id = $product_id";
-
-    $result = [];
+    $sql = "SELECT * FROM detalle_compras WHERE producto_id = $product_id;";
 
     $product = mysqli_query($connection, $sql);
 
-    if($product && mysqli_num_rows($product) == 1) {
+    if($product && mysqli_num_rows($product) >= 1) {
         return true;
     }
 
