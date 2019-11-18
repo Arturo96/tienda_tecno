@@ -247,11 +247,11 @@ header {
   background: #0091ea;
 }
 
-.delete-button {
+[class*="delete-button"] {
   background: #f00;
 }
 
-.delete-button:hover {
+[class*="delete-button"]:hover {
   background: rgba(255, 0, 0, 0.5);
 }
 

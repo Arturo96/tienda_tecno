@@ -61,7 +61,7 @@
                                         if($permissions): ?>
                                             <div class="banner-container">
                                                 <a class="edit-button" href="edit_product.php?id=<?= $product['id'] ?>">Editar</a>
-                                                <a class="delete-button" href="delete_product.php?id=<?= $product['id'] ?>">Borrar</a>
+                                                <a class="product-delete-button" href="delete_product.php?id=<?= $product['id'] ?>">Borrar</a>
                                             </div>
 
                                     <?php endif; ?>

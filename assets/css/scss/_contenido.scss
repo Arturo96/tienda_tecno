@@ -103,7 +103,7 @@
   background: $edit-button;
 }
 
-.delete-button {
+[class*="delete-button"] {
   background: $delete-button;
 
   &:hover {

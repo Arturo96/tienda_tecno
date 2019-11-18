@@ -49,12 +49,14 @@
                         $sellers = getSellers($connection);
                         while($seller = mysqli_fetch_assoc($sellers)): ?>
                             <tr>
+                                <input type="hidden" class="seller-name" value="<?= $seller['apellidos']. " ".$seller['nombre'] ?>">
+
                                 <td><?= $seller['documento'] ?></td>
                                 <td><?= $seller['apellidos'] ?></td>
                                 <td><?= $seller['nombre'] ?></td>
                                 <td>
                                     <a href="edit_seller.php?id=<?= $seller['id'] ?>" class="edit-button">Editar</a>
-                                    <a href="delete_seller.php?id=<?= $seller['id'] ?>"  class="delete-button">Eliminar</a>                                    
+                                    <a href="delete_seller.php?id=<?= $seller['id'] ?>"  class="seller-delete-button">Eliminar</a>                                    
                                 </td>
                             </tr>    
                   <?php endwhile; ?>
@@ -67,6 +69,7 @@
         <?php
         require_once 'includes/aside.php';
         require_once 'includes/footer.php';
+        cleanErrors();
         ?>
 
 
