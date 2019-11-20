@@ -64,6 +64,19 @@ function getProducts($connection, $tipo = false) {
 
 }
 
+function getRecords($connection, $tabla) {
+    $sql = "SELECT * FROM $tabla";
+
+    $result = mysqli_query($connection, $sql);
+
+    if($result && mysqli_num_rows($result) >= 1) {
+        return $result;
+    }
+
+    return [];
+
+}
+
 function getProductById($connection, $product_id, $tipo = false) {
 
     $string = "productos";

@@ -129,13 +129,13 @@
   }
 }
 
-.form-user, .form-seller, .form-product {
+.form-user, .form-seller, .form-product, .form-buy {
   margin-bottom: 2rem;
   width: 75%;
   margin-left: auto;
   margin-right: auto;
 
-  label, input[type="submit"] {
+  label, input[type="submit"], input[type="button"] {
     font-family: 'Roboto Condensed', sans-serif;
   }
 

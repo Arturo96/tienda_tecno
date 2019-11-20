@@ -6,7 +6,7 @@
         if(!empty($usuario)): ?>
                 <section class="logged">
                     <h2>Bienvenido, <?= $usuario['email'] ?></h2>
-                    <a href="" class="add-buy logged-button">Realizar compra</a>
+                    <a href="add_buy.php" class="add-buy logged-button">Realizar compra</a>
                     <?php if($usuario['rol'] == 'Admin'): ?>
                         <a href="list_users.php" class="logged-button">Usuarios</a>
                         <a href="index.php" class="logged-button">Productos</a>
