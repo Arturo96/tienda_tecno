@@ -49,6 +49,8 @@
                     </select>
                 </label>
 
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'cliente_buy') : ''  ?>
+
                 <!-- Vendedor -->
 
                 <label>Vendedor:
@@ -60,6 +62,8 @@
                         <?php endwhile; ?>
                     </select>
                 </label>
+
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'vendedor_buy') : ''  ?>
 
                 <!-- Producto -->
                             
@@ -75,13 +79,15 @@
                     </select>
                 </label>
 
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'product-buy1') : ''  ?>
+
                 <label>Cantidad:
                     <input name="cantidad1" type="number" min='1' >
                 </label>
 
                 <div class="additionalProducts" id="additionalProducts"></div>
 
-                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'cantidad') : ''  ?>
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'cantidad1') : ''  ?>
 
                 <input type="button" class="add-button" id="addProductBuy" value="Agregar producto a compra" name="add-buy">
 

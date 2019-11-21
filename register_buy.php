@@ -17,42 +17,56 @@ if (!empty($_POST)) {
 
     $vendedor_buy = (int) $_POST['vendedor_buy'];
 
-    $additionalProducts = false;
+    $numProducts = 0;
+    $products_buy = [];
+    $cantidad_products = [];
 
-    if(isset($_POST['numProductos'])) {
-        $additionalProducts = true;
-
+    if (isset($_POST['numProductos'])) {
         $numProductos = (int) $_POST['numProductos'];
-
-        $products_buy = [];
-        $cantidad_products = [];
-
-        for($i = 1; $i <= $numProductos; $i++) {
-            $products_buy[] = (int) $_POST["product-buy$i"];
-            $cantidad_products[] =  (int) $_POST["cantidad$i"];
-        }
     } else {
-        $product_buy = (int) $_POST['product-buy1'];
-        $cantidad_product =  (int) $_POST['cantidad1'];
+        $numProductos = 1;
     }
 
-    if($additionalProducts) {
-        var_dump($products_buy);
-        var_dump($cantidad_products);
-    } else {
-        var_dump($product_buy);
-        var_dump($cantidad_product);
+    for ($i = 1; $i <= $numProductos; $i++) {
+        $products_buy[] = (int) $_POST["product-buy$i"];
+        $cantidad_products[] =  (int) $_POST["cantidad$i"];
     }
-    die();
 
     // Validar los campos recibidos
 
-    // Tipo de producto (int)
+    // Cliente
 
-    if (empty($tipo_producto) || is_nan($tipo_producto) || !filter_var($tipo_producto, FILTER_VALIDATE_INT) ) {
-        $errores['tipo_producto'] = 'El tipo de producto ingresado no es válido.';
+    if (empty($cliente_buy)) {
+        $errores['cliente_buy'] = 'Es obligatorio ingresar el cliente.';
     }
 
+    // Vendedor
+
+    if (empty($vendedor_buy) || is_nan($vendedor_buy))  {
+        $errores['vendedor_buy'] = 'Es obligatorio ingresar el vendedor.';
+    }
+
+    // Productos (id_producto y cantidad)
+
+    for ($i = 1; $i <= $numProductos; $i++) {
+        $product_buy = $products_buy[$i - 1];
+        $cantidad_product = $cantidad_products[$i - 1];
+        if (empty($product_buy) || is_nan($product_buy)) {
+            $errores["product-buy$i"] = 'Producto no válido.';
+        }
+        $productInStock = getProductById($connection, $product_buy);
+        if ($cantidad_product <= 0 || is_nan($cantidad_product)) {
+            $errores["cantidad$i"] = 'Cantidad no válida.';
+        }
+        if ($productInStock['stock'] < $cantidad_product) {
+            $errores["cantidad$i"] = "Lo sentimos. Solo quedan {$productInStock['stock']} unidades.";
+        }
+
+    }
+
+    var_dump($errores);
+
+    die();
     // Marca
 
     if (empty($marca_producto)) {
@@ -67,7 +81,7 @@ if (!empty($_POST)) {
 
     // Precio del producto
 
-    if (empty($precio_producto) || is_nan($precio_producto) ) {
+    if (empty($precio_producto) || is_nan($precio_producto)) {
         $errores['precio_producto'] = 'El precio del producto ingresado no es válido.';
     } elseif ($precio_producto <= 0) {
         $errores['precio_producto'] = 'El precio ingresado debe ser mayor a 0';
@@ -75,7 +89,7 @@ if (!empty($_POST)) {
 
     // Stock del producto
 
-    if (empty($stock_producto) || is_nan($stock_producto) ) {
+    if (empty($stock_producto) || is_nan($stock_producto)) {
         $errores['stock_producto'] = 'El stock del producto ingresado no es válido.';
     } elseif ($stock_producto <= 0) {
         $errores['stock_producto'] = 'El stock ingresado debe ser mayor a 0';
@@ -88,13 +102,13 @@ if (!empty($_POST)) {
     // var_dump($patron);
     // die();
 
-    if (empty($fecha_producto) || !preg_match($patron, $fecha_producto) ) {
+    if (empty($fecha_producto) || !preg_match($patron, $fecha_producto)) {
         $errores['fecha_producto'] = 'La fecha del producto ingresado no es válida.';
     }
 
     if (count($errores) == 0) {
         if ($submit == 'Actualizar') {
-             $sql = "UPDATE productos SET 
+            $sql = "UPDATE productos SET 
                          tipo_producto_id = $tipo_producto,
                          marca            = '$marca_producto',
                          modelo           = '$modelo_producto',
