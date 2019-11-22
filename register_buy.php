@@ -41,19 +41,19 @@ if (!empty($_POST)) {
 
     // Validar los campos recibidos
 
-    // Cliente
+            // Cliente
 
     if (empty($cliente_buy)) {
         $errores['cliente_buy'] = 'Es obligatorio ingresar el cliente.';
     }
 
-    // Vendedor
+            // Vendedor
 
     if (empty($vendedor_buy) || is_nan($vendedor_buy))  {
         $errores['vendedor_buy'] = 'Es obligatorio ingresar el vendedor.';
     }
 
-    // Productos (id_producto y cantidad)
+            // Productos (id_producto y cantidad)
 
     for ($i = 1; $i <= $numProductos; $i++) {
         $product_buy = $products_buy[$i - 1];
@@ -66,45 +66,56 @@ if (!empty($_POST)) {
         if ($cantidad_product <= 0 || is_nan($cantidad_product)) {
             $errores["cantidad"] .=  "$error_string: Cantidad no válida.<br>";
         } elseif($productInStock['stock'] < $cantidad_product) {
-            $errores["cantidad"] .= "$error_string: Solo quedan {$productInStock['stock']} unidades.<br>";
+            if($productInStock['stock'] == 0) {
+                $errores["cantidad"] .= "$error_string: El producto está agotado <br>";
+        
+            } else {
+                $plural1 = '';
+                $plural2 = '';
+                if($productInStock['stock'] != 1) {
+                    $plural1 = 'n';
+                    $plural2 = 'es';
+                } 
+                $errores["cantidad"] .= "$error_string: Solo queda$plural1 {$productInStock['stock']} unidad$plural2.<br>";
+            }
         }
 
     }
 
 
     if (count($errores) == 0) {
-        echo 'Sin errores';
-        die();
+        
+        // Insertar compra
+        
+        $insert_compra = insertInCompras($connection, $cliente_buy, $vendedor_buy);
+        
+        if($insert_compra) {
+            
+            $id_compra = (int) getIdNewBuy($connection);
+            
+            // Insertar productos comprados
 
-        if ($submit == 'Actualizar') {
-            $sql = "UPDATE productos SET 
-                         tipo_producto_id = $tipo_producto,
-                         marca            = '$marca_producto',
-                         modelo           = '$modelo_producto',
-                         precio           = $precio_producto,
-                         stock            = $stock_producto,
-                         fecha_garantia   = '$fecha_producto',
-                         descripcion      =  '$desc_producto'
-                     WHERE id = $product_id;";
+            foreach($products_buy as $index => $product_id) {
+                $sql = "INSERT INTO detalle_compras VALUES($id_compra, $product_id, {$cantidad_products[$index]}) ";
+                $insertProduct = mysqli_query($connection, $sql);
+                $updateProduct = updateProductQuantity($connection, $product_id, $cantidad_products[$index]);
+                if(!$insertProduct) {
+                    $errores['db'] = "Error al insertar el producto $index: ". mysqli_error($connection); 
+                } elseif(!$updateProduct) {
+                    $errores['db'] = "Error al actualizar el producto $index: ". mysqli_error($connection); 
+                }
+
+            }
+
+            if(count($errores) == 0) {
+                $_SESSION['completed'] = "Compra ingresada correctamente";
+            }
+    
         } else {
-            $sql = "INSERT INTO productos VALUES(null, $tipo_producto,'$marca_producto', '$modelo_producto', $precio_producto, $stock_producto, '$fecha_producto', '$desc_producto');";
+            $errores['db'] = "Error en la compra: ". mysqli_error($connection);
         }
 
-        $product = mysqli_query($connection, $sql);
-
-        if ($product) {
-            $string = 'insertado';
-            if ($submit == 'Actualizar') {
-                $string = 'actualizado';
-            }
-            $_SESSION['completed'] = "Producto $string correctamente.";
-        } else {
-            $string = 'insertar';
-            if ($submit == 'Actualizar') {
-                $string = 'actualizar';
-            }
-            $errores['db'] = "Error al $string el producto: " . mysqli_error($connection);
-        }
+        
     }
 
     $_SESSION['errores'] = $errores;

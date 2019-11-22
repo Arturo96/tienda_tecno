@@ -217,6 +217,10 @@ header {
   padding: 0.35em;
 }
 
+.empty-banner {
+  background: #f00;
+}
+
 .banner-container {
   margin-top: 1rem;
 }

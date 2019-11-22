@@ -233,3 +233,36 @@ function getCategories($connection)
 
     return $result;
 }
+
+function insertInCompras($connection, $cliente, $vendedor_id) {
+    $sql = "INSERT INTO compras VALUES(null, '$cliente', $vendedor_id, CURDATE())";
+
+    return mysqli_query($connection, $sql);
+
+}
+
+function getIdNewBuy($connection) {
+    $sql = "SELECT id FROM compras ORDER BY id DESC LIMIT 1";
+
+    $result = -1;
+
+    $idNewBuy = mysqli_query($connection, $sql);
+
+    if ($idNewBuy && mysqli_num_rows($idNewBuy) == 1) {
+        $result = mysqli_fetch_assoc($idNewBuy)['id'];
+    }
+
+    return $result;
+}
+
+function updateProductQuantity($connection, $product_id, $cantidad_producto) {
+
+    $stock_producto = getProductById($connection, $product_id)['stock'];
+    $sql = "UPDATE productos set
+                stock = stock - $cantidad_producto
+            WHERE id = $product_id;";
+    
+    return mysqli_query($connection, $sql);
+
+
+}

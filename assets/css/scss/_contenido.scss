@@ -34,9 +34,6 @@
     color: var(--second-color-title);
   }
 
-  #{&}-image {
-  }
-
   #{&}-description {
     color: #fff;
     letter-spacing: 1px;
@@ -46,9 +43,6 @@
 
 .main-info {
   display: flex;
-}
-
-.product-image {
 }
 
 .product-info {
@@ -71,6 +65,10 @@
   background: #09bd09;
   border-radius: 5px;
   padding: 0.35em;
+}
+
+.empty-banner {
+  background: #f00;
 }
 
 .banner-container {
