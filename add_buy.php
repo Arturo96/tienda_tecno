@@ -19,7 +19,7 @@
         header('Location: index.php');
         $permissions = false;
     }
-    if(isset($_GET['categoria'])) {
+    if (isset($_GET['categoria'])) {
         $tipo_producto_id = (int) $_GET['categoria'];
     }
     ?>
@@ -33,7 +33,10 @@
                 <div class="alert success">
                     <?= $_SESSION['completed'] ?>
                 </div>
-            <?php endif; ?>
+            <?php endif;
+                echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'cantidad') : '';
+            
+            ?>
 
             <form action="register_buy.php" id="formBuy" class="form-buy" method="post">
 
@@ -43,8 +46,13 @@
                     <select name="cliente_buy">
                         <?php
                         $clientes = getRecords($connection, 'clientes');
-                        while ($cliente = mysqli_fetch_assoc($clientes)) : ?>
-                            <option value="<?= $cliente['email'] ?>"><?= $cliente['email'] ?></option>
+                        while ($cliente = mysqli_fetch_assoc($clientes)) : 
+                            $selected = '';
+                            if (isset($_SESSION['cliente_buy']) && $cliente['email'] == $_SESSION['cliente_buy']) {
+                                $selected = 'selected';
+                            }
+                        ?>
+                            <option value="<?= $cliente['email'] ?>" <?= $selected ?> ><?= $cliente['email'] ?></option>
                         <?php endwhile; ?>
                     </select>
                 </label>
@@ -57,8 +65,13 @@
                     <select name="vendedor_buy">
                         <?php
                         $vendedores = getSellers($connection);
-                        while ($vendedor = mysqli_fetch_assoc($vendedores)) : ?>
-                            <option value="<?= $vendedor['id'] ?>"><?= $vendedor['apellidos'],' '.$vendedor['nombre'] ?></option>
+                        while ($vendedor = mysqli_fetch_assoc($vendedores)) : 
+                            $selected = '';
+                            if (isset($_SESSION['vendedor_buy']) && $vendedor['id'] == $_SESSION['vendedor_buy']) {
+                                $selected = 'selected';
+                            }
+                        ?>
+                            <option value="<?= $vendedor['id'] ?>" <?= $selected ?>><?= $vendedor['apellidos'], ' ' . $vendedor['nombre'] ?></option>
                         <?php endwhile; ?>
                     </select>
                 </label>
@@ -66,34 +79,56 @@
                 <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'vendedor_buy') : ''  ?>
 
                 <!-- Producto -->
-                            
-                <label>Producto: 
-                    <select class="product-buy" name="product-buy1" id="productoBuy">
-                        <?php
-                            $productos = getProducts($connection);
-                        while ($producto = mysqli_fetch_assoc($productos)) : 
-    
-                        ?>
-                            <option value="<?= $producto['id'] ?>"><?= $producto['marca'].' '.$producto['modelo'] ?></option>
-                        <?php endwhile; ?>
-                    </select>
-                </label>
+                <?php
+                if (isset($_SESSION['products_buy'])) {
+                    $products_buy = $_SESSION['products_buy'];
+                    $cantidad_products = $_SESSION['cantidad_products'];
+                    foreach ($products_buy as $index => $product_buy) { ?>
+                        <label>Producto <?= $index + 1 ?>:
+                            <select class="product-buy" name="product-buy<?= $index + 1 ?>" id="productoBuy">
+                                <?php
+                                        $productos = getProducts($connection);
+                                        while ($producto = mysqli_fetch_assoc($productos)) :
+                                            $selected = '';
+                                            if ($producto['id'] == $products_buy[$index]) {
+                                                $selected = 'selected';
+                                            }
+                                            ?>
+                                    <option value="<?= $producto['id'] ?>" <?= $selected ?>><?= $producto['marca'] . ' ' . $producto['modelo'] ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                        </label>
+                        <label>Cantidad:
+                            <input name="cantidad<?= $index + 1 ?>" type="number" value="<?= $cantidad_products[$index] ?>" min='1'>
+                        </label>
+                    <?php    }
+                    } else { ?>
+                    <label>Producto 1:
+                        <select class="product-buy" name="product-buy1" id="productoBuy">
+                            <?php
+                                $productos = getProducts($connection);
+                                while ($producto = mysqli_fetch_assoc($productos)) :
+
+                                    ?>
+                                <option value="<?= $producto['id'] ?>"><?= $producto['marca'] . ' ' . $producto['modelo'] ?></option>
+                            <?php endwhile; ?>
+                        </select>
+                    </label>
+
+                    <label>Cantidad:
+                        <input name="cantidad1" type="number" min='1'>
+                    </label>
+                <?php } ?>
 
                 <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'product-buy1') : ''  ?>
 
-                <label>Cantidad:
-                    <input name="cantidad1" type="number" min='1' >
-                </label>
-
                 <div class="additionalProducts" id="additionalProducts"></div>
-
-                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'cantidad1') : ''  ?>
 
                 <input type="button" class="add-button" id="addProductBuy" value="Agregar producto a compra" name="add-buy">
 
                 <input type="submit" name="submitBuy" value="Registrar">
 
-                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'db') : '' ?> 
+                <?php echo isset($_SESSION['errores']) ? showErrors($_SESSION['errores'], 'db') : '' ?>
 
                 <div id="numProductos"></div>
 

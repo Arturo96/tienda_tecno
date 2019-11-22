@@ -32,6 +32,13 @@ if (!empty($_POST)) {
         $cantidad_products[] =  (int) $_POST["cantidad$i"];
     }
 
+    // Creamos sesiones de cada campo para que el usuario no los digite otra vez
+
+    $_SESSION['cliente_buy'] = $cliente_buy;
+    $_SESSION['vendedor_buy'] = $vendedor_buy;
+    $_SESSION['products_buy'] = $products_buy;
+    $_SESSION['cantidad_products'] = $cantidad_products;
+
     // Validar los campos recibidos
 
     // Cliente
@@ -55,58 +62,20 @@ if (!empty($_POST)) {
             $errores["product-buy$i"] = 'Producto no válido.';
         }
         $productInStock = getProductById($connection, $product_buy);
+        $error_string = "Error en el producto $i";
         if ($cantidad_product <= 0 || is_nan($cantidad_product)) {
-            $errores["cantidad$i"] = 'Cantidad no válida.';
+            $errores["cantidad"] .=  "$error_string: Cantidad no válida.<br>";
+        } elseif($productInStock['stock'] < $cantidad_product) {
+            $errores["cantidad"] .= "$error_string: Solo quedan {$productInStock['stock']} unidades.<br>";
         }
-        if ($productInStock['stock'] < $cantidad_product) {
-            $errores["cantidad$i"] = "Lo sentimos. Solo quedan {$productInStock['stock']} unidades.";
-        }
 
     }
 
-    var_dump($errores);
-
-    die();
-    // Marca
-
-    if (empty($marca_producto)) {
-        $errores['marca_producto'] = 'La marca ingresada es obligatoria.';
-    }
-
-    // Modelo del producto
-
-    if (empty($modelo_producto)) {
-        $errores['modelo_producto'] = 'El modelo del producto ingresado es obligatorio.';
-    }
-
-    // Precio del producto
-
-    if (empty($precio_producto) || is_nan($precio_producto)) {
-        $errores['precio_producto'] = 'El precio del producto ingresado no es válido.';
-    } elseif ($precio_producto <= 0) {
-        $errores['precio_producto'] = 'El precio ingresado debe ser mayor a 0';
-    }
-
-    // Stock del producto
-
-    if (empty($stock_producto) || is_nan($stock_producto)) {
-        $errores['stock_producto'] = 'El stock del producto ingresado no es válido.';
-    } elseif ($stock_producto <= 0) {
-        $errores['stock_producto'] = 'El stock ingresado debe ser mayor a 0';
-    }
-
-    // Fecha de garantía
-
-    $patron = '/^202\d{1}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/';
-
-    // var_dump($patron);
-    // die();
-
-    if (empty($fecha_producto) || !preg_match($patron, $fecha_producto)) {
-        $errores['fecha_producto'] = 'La fecha del producto ingresado no es válida.';
-    }
 
     if (count($errores) == 0) {
+        echo 'Sin errores';
+        die();
+
         if ($submit == 'Actualizar') {
             $sql = "UPDATE productos SET 
                          tipo_producto_id = $tipo_producto,

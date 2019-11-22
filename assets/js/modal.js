@@ -35,8 +35,18 @@ const addTemplate = baseElement => {
         }
         location.href = `http://localhost/tienda_tecno/add_buy.php?categoria=${tipo_producto_id}`;
         
+    },
+    calcNumProducts = () => {
+            numProductos = d.querySelectorAll('[class^="product-buy"]').length;
+            d.getElementById('numProductos').innerHTML = `<input name="numProductos" type="hidden" value="${numProductos}">` 
     }
 
+
+    d.addEventListener("DOMContentLoaded", () => {
+        calcNumProducts();
+    });
+
+ 
 // Botones de eliminar
 
 if (delete_buttons != null) {
@@ -101,21 +111,24 @@ if (addProductBuy != null) {
     addProductBuy.addEventListener('click', () => {
         if (additionalProducts != null) {
             let newProduct = `<hr>
-                            <label>Producto: 
+                            <label>Producto ${numeroProducto} : 
                                 <select class="product-buy" name="product-buy${numeroProducto}">
                                         ${addTemplate(productoBuy)}
                                 </select>
                             </label>
                             
                             <label>Cantidad:
-                              <input name="cantidad${numeroProducto++}" type="number" min='1' >
+                              <input id="cantidad${numeroProducto}" name="cantidad${numeroProducto++}" type="number" min='1' >
                             </label>
                             `;
+            let elDiv = d.createElement('div');
+            elDiv.innerHTML = newProduct;
+            let fragment = document.createDocumentFragment();
+            fragment.appendChild(elDiv);
+            
+            additionalProducts.appendChild(fragment);
 
-            additionalProducts.innerHTML += newProduct;
-
-            numProductos = d.getElementsByClassName('product-buy').length;
-            d.getElementById('numProductos').innerHTML = `<input name="numProductos" type="hidden" value="${numProductos}">`
+            calcNumProducts();
         }
     });
 }

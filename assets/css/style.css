@@ -362,6 +362,7 @@ aside {
 
 .danger {
   color: #f00;
+  text-align: left;
 }
 
 .success {
